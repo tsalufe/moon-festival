@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>中秋糖糖线上活动 - 随机数生成器</title>
+  </head>
+
+  <body>
+		<a href="/">主页</a>
+    <div class="div-main" style="text-align:center;">
+      <div class="dice-content" style="width:50%; text-align:left; margin-left: 25%;">
+        <div class="min-value">
+          <label>最小数字</label>
+          <input type="text" name="minvalue" value="1" />
+        </div>
+        <div class="max-value">
+          <label>最大数字</label>
+          <input type="text" name="maxvalue" value="100" />
+        </div>
+        <div class="max-value">
+          <input id="btn_gen" type="button" name="button" value="生成随机数"/>
+        </div>
+        <div class="output">
+          <textarea name="output" style="width:100%; height: 50px; padding: 20px;"></textarea>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/public/js/jquery-v2.1.3.js"></script>
+    <script type="text/javascript">
+      $('#btn_gen').click(function (e) {
+        let minvalue = parseInt($('[name=minvalue]').val())
+        let maxvalue = parseInt($('[name=maxvalue]').val())
+        let random = Math.ceil(minvalue + (maxvalue - minvalue) * Math.random())
+        $('textarea[name=output]').val(random)
+      })
+    </script>
+  </body>
+</html>

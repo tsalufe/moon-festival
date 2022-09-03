@@ -12,6 +12,18 @@ app.get('/', (req, res) =>  {
   res.sendFile(__dirname + '/'); 
 });
 
+app.get('/bobing', (req, res) =>  {
+  res.sendFile(__dirname + '/bobing.html'); 
+});
+
+app.get('/dice', (req, res) =>  {
+  res.sendFile(__dirname + '/dice.html'); 
+});
+
+app.get('/lines', (req, res) =>  {
+  res.sendFile(__dirname + '/lines.html'); 
+});
+
 
 // usernames which are currently connected to the chat
 let usernames = {};
