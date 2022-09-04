@@ -32,10 +32,10 @@ var dicefun = {
 	},
 	createDice:function(num,i){
 		var image = document.createElement('img');
-   		  	image.setAttribute("class","redpacket");
-   		  	image.id = "redpacket" + i;
-    	  	image.src = 'public/img/' + num +'.jpg';
-    	  	return image;
+    image.setAttribute("class","redpacket");
+    image.id = "redpacket" + i;
+    image.src = 'public/img/' + num +'.jpg';
+    return image;
 	},
 }
 
@@ -68,7 +68,7 @@ class MainChat  {
       $('.chat-title').html('<h2>欢迎，' + name + '</h2>')
       let results = JSON.parse(localStorage.getItem('bobing-results'))
       if (results.length > 0) {
-        let resultsHtml = results.map( result => '<div><span>' + result.map(i => '<img src="/public/img/' + (i+1) + '.jpg" />').join('</span><span>') + '</span></div>').join('')
+        let resultsHtml = results.map( result => MainChat.getResultAsDices(result)).join('')
         $('.my-results').html('<h3>你的摇色子记录</h3>' + resultsHtml)
       }
 	}
@@ -78,14 +78,18 @@ class MainChat  {
 			scrollInertia: 10,timeout: 0
 		});
 	}
+
+  static renderWinners(winners) {
+    let html = winners.map(winner => '<div class="winner-card"><div class="winner-name">' + winner.name + '</div><div class="winner-title">' + winner.title +'</div></div>').join('')
+    $('.winner-board').html(html)
+  }
+  
+  static renderMessage(message) {
+    let html = '<div class="message-row"><div class="message-name">' + message.name + '</div><div class="message-result">' + MainChat.getResultAsDices(message.result) +'</div></div>'
+    $('.message-box').html(html + $('.message-box').html())
+  }
+
+  static getResultAsDices(result) {
+    return '<div class="bobing-result"><span>' + result.sort().map(i => '<img src="/public/img/' + (i+1) + '.jpg" />').join('</span><span>') + '</span></div>'
+  }
 }
-
-
-
-
-
-
-
-
-
-

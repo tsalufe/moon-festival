@@ -6,12 +6,14 @@
 		<link rel="stylesheet" href="public/css/style.css" />
 		<link rel="stylesheet" href="public/css/bobing.css" />
 		<style type="text/css">
+			body {
+				padding: 15px;
+			}
 			.flex-container {
 				display: flex;
 			}
 
 			.flex-container > div {
-				background-color: #f1f1f1;
 				margin: 10px;
 				padding: 20px;
 			}
@@ -20,6 +22,45 @@
 			}
 			.my-results>div>span>img {
 				padding-left: 10px;
+				width: 30px;
+			}
+			.col-right, .winner-board, .chat-title, .my-results, .message-box {
+				background-color: #f1f1f1;
+			}
+			.flex-container > div.col-left {
+				padding-top: 0px;
+			}
+			.chat-title {
+				padding-top: 10px;
+			}
+			.winner-board {
+				height: 200px;
+			}
+			.message-box {
+				height: 300px;
+			}
+			.winner-card {
+				display: inline-block;
+				width: 31%;
+				border: solid 2px #c04848;
+				text-align: center;
+				border-radius: 5px;
+				margin-left: 1%;
+				margin-bottom: 5px;
+			}
+			.message-box {
+				font-size: 11px;
+			}
+			.message-row > div {
+				display: inline-block;
+			}
+			.message-row > .message-name {
+				width: 30%;
+			}
+			.message-row > .message-result {
+				width: 60%;
+			}
+			.message-result img {
 				width: 30px;
 			}
 		</style>
@@ -36,9 +77,10 @@
 					</div>
 					<div class="my-results">
 					</div>
+					<h3>所有赢家</h3>
 					<div class="winner-board">
-						<h3>所有赢家</h3>
 					</div>
+					<h3>弹幕</h3>
 					<div class="message-box">
 					</div>
 				</div>
@@ -68,6 +110,10 @@
 				</script>
 			</div>
 
+		</div>
+
+		<div class="description">
+			游戏介绍
 		</div>
   </body>
 </html>
