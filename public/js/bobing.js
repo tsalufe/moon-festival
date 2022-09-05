@@ -142,7 +142,9 @@ class MainChat  {
       let name = localStorage.getItem('bobing-name');
       if (!name) {
         name = prompt("请输入你的 名字+学校+入学年级 开始");
-        localStorage.setItem('bobing-name', name)
+        if (name) {
+          localStorage.setItem('bobing-name', name)
+        }
         if (localStorage.getItem('bobing-name') === '叶树扬 南大 08') {
           $('#new-game').show()
         }
