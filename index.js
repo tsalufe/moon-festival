@@ -36,9 +36,55 @@ const check_key = v =>{
 	return val;
 }
 
+let winners = []
+
+function getWinTitle(result) {
+  let resultStr = result.sort().join('')
+  if (resultStr === '003333') {
+    return [0, '金花']
+  } else if (resultStr === '333333') {
+    return [1, '状元-六杯红']
+  } else if (resultStr === '000000') {
+    return [1, '状元-遍地锦']
+  } else if (resultStr === '111111') {
+    return [1, '状元-黑六勃']
+  } else if (resultStr === '033333') {
+    return [1, '状元-五红']
+  } else if (resultStr === '012345') {
+    return [2, '榜眼-对堂']
+  } else if (result.filter(x => x == 1).length === 5) {
+    return [1, '状元-五子登科']
+  } else if (result.filter(x => x == 3).length === 4) {
+    return [1, '状元-四点红']
+  } else if (result.filter(x => x == 3).length === 3) {
+    return [3, '探花-三红']
+  } else if (result.filter(x => x == 1).length === 4) {
+    return [4, '进士-四进']
+  } else if (result.filter(x => x == 3).length === 2) {
+    return [5, '举人-二举']
+  } else if (result.filter(x => x == 3).length === 1) {
+    return [6, '秀才-一秀']
+  }
+  return [7, '中秋快乐']
+}
+
+function handleResult(socket, data) {
+	io.emit('updatechat', socket.username, data)
+	let winTitle = getWinTitle(data.result)
+	if (winTitle[0] < 4) {
+		winners.push({
+			name: data.name,
+			title: winTitle[1],
+		})
+	}
+	io.emit('updatewinners', socket.username, winners)
+}
+
 io.on('connection',  socket => {
 	// when the client emits 'sendchat', this listens and executes
-	socket.on('sendchat', data => io.emit('updatechat', socket.username, data));
+	socket.on('sendchat', data => handleResult(socket, data));
+	
+	socket.on('bobingcontrol', data => io.emit('bobingcontrol', socket.username, 'start'));
 
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', username => {
@@ -48,7 +94,7 @@ io.on('connection',  socket => {
 		usernames[username] = socket.id;
 		// echo to client they've connected
 		//socket.emit('updatechat', 'Chat Bot', socket.username + ' you have joined the chat');
-		socket.emit('updatechat', 'Chat Bot', `${socket.username} you have joined the chat`);
+		io.emit('updatechat', 'Chat Bot', `${socket.username} 加入 ${Object.keys(usernames).length}`);
 		// echo to client their username
 		socket.emit('store_username', username);
 		// echo globally (all clients) that a person has connected

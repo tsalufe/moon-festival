@@ -9,13 +9,22 @@
 			body {
 				padding: 15px;
 			}
-			.flex-container {
-				display: flex;
+			@media screen and (min-width: 500px) {
+				.flex-container {
+					display: flex;
+				}
+				.flex-container > .col-left {
+					flex-grow: 3;
+				}
 			}
 
 			.flex-container > div {
 				margin: 10px;
 				padding: 20px;
+			}
+			.my-results {
+				max-height: 100px;
+				overflow-y: scroll;
 			}
 			.my-results>div {
 				text-align: center;
@@ -38,6 +47,7 @@
 			}
 			.message-box {
 				height: 300px;
+				overflow-y: scroll;
 			}
 			.winner-card {
 				display: inline-block;
@@ -56,21 +66,32 @@
 			}
 			.message-row > .message-name {
 				width: 30%;
+				font-weight: bold;
 			}
 			.message-row > .message-result {
-				width: 60%;
+				width: 50%;
+			}
+			.message-row > .message-title {
+				width: 18%;
+				font-weight: bold;
 			}
 			.message-result img {
 				width: 30px;
+			}
+			#new-game {
+				display: none;
+			}
+			#start {
+				display: none;
 			}
 		</style>
   </head>
 
   <body>
 		<a href="/">主页</a>
-		<button class="new-game">开始新一轮（主持人）</button>
+		<button id="new-game" class="new-game" onclick="newgame()">开始新一轮（主持人）</button>
 		<div class="flex-container">
-			<div class="col-left" style="flex-grow:3;">
+			<div class="col-left">
 				<div class="chat">
 					<div class="chat-title">
 						<h1>请刷新页面输入名字</h1>
@@ -100,12 +121,15 @@
 				</div>
 				
 				<div class="btn-box">
-					<input class="btn" type="button" value="开始" onclick="begin()" />
+					<input id="start" class="btn" type="button" value="开始" onclick="begin()" />
 				</div>
 				
 				<script>
 					function begin(){
 						dicefun.init();
+					}
+					function newgame() {
+						MainChat.newgame()
 					}
 				</script>
 			</div>
@@ -113,7 +137,7 @@
 		</div>
 
 		<div class="description">
-			游戏介绍
+			<img src="/public/img/bobing-rule.jpg" />
 		</div>
   </body>
 </html>
