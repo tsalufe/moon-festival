@@ -91,6 +91,7 @@ io.on('connection',  socket => {
 		for(let i in usernames) {
 			delete usernames[i]
 		}
+		io.emit('reset', socket.username, 'reset')
 	})
 
 	// when the client emits 'adduser', this listens and executes

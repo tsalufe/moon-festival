@@ -132,6 +132,11 @@ class MainChat  {
           $('#start').hide()
         }
 			});
+      socket.on('reset', (username, status) => {
+        localStorage.removeItem('bobing-name')
+        localStorage.removeItem('bobing-results')
+        localStorage.removeItem('bobing-control')
+      })
 			
 			// on connection to server, ask for user's name with an anonymous callback
       let name = localStorage.getItem('bobing-name');
