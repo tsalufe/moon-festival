@@ -86,6 +86,13 @@ io.on('connection',  socket => {
 	
 	socket.on('bobingcontrol', data => io.emit('bobingcontrol', socket.username, 'start'));
 
+	socket.on('reset', data => {
+		winners.splice(0)
+		for(let i in usernames) {
+			delete usernames[i]
+		}
+	})
+
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', username => {
 		// we store the username in the socket session for this client
@@ -100,31 +107,6 @@ io.on('connection',  socket => {
 		// echo globally (all clients) that a person has connected
 		//socket.broadcast.emit('updatechat', 'Chat Bot', `${username} has connected`);
 	});
-
-	// when the user disconnects.. perform this
-	socket.on('disconnect', () => {
-		// remove the username from global usernames list
-		delete usernames[socket.username];
-		// echo globally that this client has left
-		//socket.broadcast.emit('updatechat', 'Chat Bot', `${socket.username} has left chat`);
-	});
-	
-	// when the user sends a private msg to a user id, first find the username
-	socket.on('check_user', (asker, id) => io.to(usernames[asker]).emit('msg_user_found', check_key(id)));
-	
-	// when the user sends a private message to a user.. perform this
-	socket.on('msg_user', (to_user, from_user, msg) => {
-		//emits 'msg_user_handle', this updates the chat body on client-side
-		io.to(usernames[to_user]).emit('msg_user_handle', from_user, msg);
-		//write the chat message to a txt file		
-		const wstream = fs.createWriteStream('chat_data.txt');		
-		wstream.write(msg);
-		wstream.write('\r\n');
-		wstream.end();
-		
-	});
-
-
 });
 
 http.listen(3000, () => console.log('listening on *:3000'));
