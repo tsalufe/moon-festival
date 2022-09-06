@@ -24,6 +24,10 @@ app.get('/lines', (req, res) =>  {
   res.sendFile(__dirname + '/lines.html'); 
 });
 
+app.get('/bingo', (req, res) =>  {
+  res.sendFile(__dirname + '/bingo.html'); 
+});
+
 
 // usernames which are currently connected to the chat
 let usernames = {};

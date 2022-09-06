@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>中秋糖糖线上活动 - 中秋宾果统计</title>
+    <style type="text/css">
+      .div-main {
+        padding-left: 5%;
+      }
+      .messages > textarea {
+        width: 100%;
+        height: 200px;
+      }
+      .selected-questions {
+        height: 30px;
+      }
+      .selected-questions > span {
+        margin-right: 20px;
+        font-weight: bold;
+      }
+      #max {
+        padding-left: 10px;
+      }
+      .winners {
+        height: 220px;
+        overflow-y: scroll;
+      }
+      .winners > .winner {
+        display: inline-block;
+        width: 150px;
+        height: 45px;
+        margin-right: 5px;
+        border: solid 2px #c04848;
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: top;
+      }
+      .flex-container.winners-by-question {
+        display: flex;
+        min-height: 200px;
+      }
+      .winners-by-question {
+        border-top: solid 1px #c04848;
+      }
+      .winners-by-question > div {
+        text-align: center;
+        width: 15%;
+        border-right: solid 1px #c04848;
+        max-height: 100%;
+        overflow-y:scroll;
+      }
+    </style>
+  </head>
+
+  <body>
+		<a href="/">主页</a>
+    <div class="div-main">
+      <label>题目数目</label><input id="max" type="text" name="max" value="30"/>
+      <button id="select-question" onclick="selectQuestion()">随机抽题</button>
+      <h3>抽到的题号</h3>
+      <div class="selected-questions"></div>
+      <h3>赢家排名</h3>
+      <div class="winners">
+        <div>还没有赢家</div>
+      </div>
+      <h3>每题的赢家</h3>
+      <div class="flex-container winners-by-question">
+      </div>
+      <div class="messages">
+        <label>中秋宾果回答（腾讯会议所有聊天记录，会自动过滤无效回答）</label>
+        <textarea id="messages" onchange="loadMessages()"></textarea>
+      </div>
+    </div>
+    <script type="text/javascript" src="/public/js/jquery-v2.1.3.js"></script>
+    <script type="text/javascript" src="/public/js/bingo.js"></script>
+  </body>
+</html>
