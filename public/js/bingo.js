@@ -17,18 +17,19 @@ function loadMessages() {
   while( i < lines.length - 1) {
     if (isDivider(lines[i+1])) {
       let correctAnswer
+      let dashesOnly = false
       while (i+1 < lines.length && lines[i+1].match(/^-+$/)) {
+        dashesOnly = true
         i++
       }
       // Skip between "-----" and "------12.D----"
-      if (!isDivider(lines[i+1])) {
+      if (dashesOnly && !isDivider(lines[i+1])) {
         while (i+1 < lines.length && !isDivider(lines[i+1])) {
           i++
         }
       }
       // "------12-----" starting
       let question = getQuestionFromDivider(lines[i+1])
-      if (lines[i+1] == '叶树扬') console.log(lines[i+1], isDivider(lines[i+1]), question)
       if (question) {
         currentAnswers = []
         currentQuestion = question
