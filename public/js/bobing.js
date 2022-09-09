@@ -142,7 +142,7 @@ class MainChat  {
       let name = localStorage.getItem('bobing-name');
       if (!name) {
         name = prompt("请输入你的中文 名字+学校+入学年级 开始");
-        while (!name || name.match(/[a-z]+/)) {
+        while (!name || name.match(/[a-zA-Z]+/)) {
           name = prompt("请输入你的中文 名字+学校+入学年级 开始");
         }
         if (name) {
