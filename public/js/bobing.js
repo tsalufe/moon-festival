@@ -141,7 +141,10 @@ class MainChat  {
 			// on connection to server, ask for user's name with an anonymous callback
       let name = localStorage.getItem('bobing-name');
       if (!name) {
-        name = prompt("请输入你的 名字+学校+入学年级 开始");
+        name = prompt("请输入你的中文 名字+学校+入学年级 开始");
+        while (!name || name.match(/[a-z]+/)) {
+          name = prompt("请输入你的中文 名字+学校+入学年级 开始");
+        }
         if (name) {
           localStorage.setItem('bobing-name', name)
         }
